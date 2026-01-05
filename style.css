@@ -1,0 +1,599 @@
+:root {
+    --vermilion: #D32F2F;
+    --gold: #D4AF37;
+    --off-white: #F5F5F5;
+    --dark-wood: #3E2723;
+    --paper: #FFFDF0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Microsoft JhengHei', sans-serif;
+    background-color: #000;
+    color: var(--dark-wood);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('shrine_background_1767320094790.png');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) blur(3px);
+    z-index: -1;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Mascot */
+.mascot-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 20;
+    max-width: 200px;
+}
+
+.mascot-img {
+    width: 120px;
+    height: auto;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+}
+
+.speech-bubble {
+    background: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    position: relative;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--vermilion);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: var(--vermilion) transparent;
+}
+
+/* Flow Steps */
+.flow-step {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 40px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.flow-step.active {
+    display: block;
+    animation: fadeIn 0.5s forwards;
+}
+
+.flow-step h2 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: var(--gold);
+}
+
+.flow-btn {
+    margin-top: 30px;
+    padding: 10px 30px;
+    background: var(--vermilion);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.flow-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+/* Interactions */
+.washing-station {
+    font-size: 5rem;
+    margin: 30px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.ladle {
+    transition: transform 0.3s;
+}
+
+.pouring {
+    transform: rotate(-45deg);
+}
+
+.water-effect {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 0;
+    background: rgba(100, 200, 255, 0.6);
+    border-radius: 5px;
+}
+
+.water-anim {
+    animation: flowDown 1s forwards;
+}
+
+@keyframes flowDown {
+    0% {
+        height: 0;
+        opacity: 1;
+    }
+
+    50% {
+        height: 100px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+.coin-box {
+    font-size: 4rem;
+    margin: 30px 0;
+    cursor: pointer;
+}
+
+.coin {
+    font-size: 6rem;
+    cursor: pointer;
+    user-select: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+}
+
+.coin:hover {
+    transform: scale(1.1);
+}
+
+.coin-drop {
+    animation: dropCoin 0.5s forwards;
+    pointer-events: none;
+    /* Add this to prevent blocking buttons below */
+}
+
+@keyframes dropCoin {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+}
+
+.bell-container {
+    cursor: pointer;
+}
+
+.bell {
+    font-size: 6rem;
+    display: inline-block;
+}
+
+.bell-ring {
+    animation: ringBell 0.5s 3;
+}
+
+@keyframes ringBell {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(15deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-15deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Drawing Step */
+header h1 {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 3rem;
+    color: var(--off-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+.omikuji-box-wrapper {
+    position: relative;
+    width: 120px;
+    height: 250px;
+    margin: 0 auto 40px;
+}
+
+.omikuji-box {
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-wood);
+    border: 4px solid var(--vermilion);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-top,
+.box-bottom {
+    position: absolute;
+    width: 110%;
+    height: 20px;
+    background-color: var(--vermilion);
+    left: -5%;
+}
+
+.box-top {
+    top: 10%;
+}
+
+.box-bottom {
+    bottom: 10%;
+}
+
+.box-middle .kanji {
+    color: var(--gold);
+    font-size: 2rem;
+    writing-mode: vertical-rl;
+    font-family: 'ZCOOL XiaoWei', serif;
+    letter-spacing: 10px;
+}
+
+.stick-hole {
+    position: absolute;
+    top: -5px;
+    width: 20px;
+    height: 10px;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+.omikuji-stick {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 100px;
+    background-color: #DEB887;
+    border: 1px solid #A0522D;
+    display: none;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+
+    75% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.shaking {
+    animation: shake 0.2s infinite;
+}
+
+@keyframes stick-out {
+    0% {
+        top: -10px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -80px;
+        opacity: 1;
+    }
+}
+
+.stick-emerge {
+    display: block !important;
+    animation: stick-out 0.5s forwards;
+}
+
+.draw-btn {
+    background-color: var(--vermilion);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background-color: var(--paper);
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 5px;
+    transform: scale(0.8);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+.paper-border {
+    border: 2px solid var(--dark-wood);
+    padding: 20px;
+    position: relative;
+}
+
+.result-header {
+    border-bottom: 2px solid var(--vermilion);
+    margin-bottom: 20px;
+}
+
+#fortuneRank {
+    font-size: 2.5rem;
+    color: var(--vermilion);
+    font-family: 'ZCOOL XiaoWei', serif;
+}
+
+.poetry {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #5D4037;
+    white-space: pre-line;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.details-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    /* Language Toggle Switch */
+    .lang-toggle-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 8px 20px;
+        border-radius: 30px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .lang-label {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #8b0000;
+        font-family: 'Noto Sans JP', 'ZCOOL XiaoWei', sans-serif;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ddd;
+        transition: .4s;
+        border: 1px solid #ccc;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 2px;
+        background-color: white;
+        transition: .4s;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    input:checked+.slider {
+        background-color: #8b0000;
+    }
+
+    input:checked+.slider:before {
+        transform: translateX(26px);
+    }
+
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+    /* Typography Optimization for Chinese */
+    .poetry {
+        line-height: 1.8;
+    }
+
+    [lang="zh-TW"] .label {
+        letter-spacing: 2px;
+    }
+
+    gap: 15px;
+    text-align: left;
+    border-top: 1px dashed #ccc;
+    padding-top: 20px;
+    animation: unfold 0.5s ease-out;
+}
+
+@keyframes unfold {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        max-height: 500px;
+    }
+}
+
+.detail-item .label {
+    display: block;
+    font-weight: bold;
+    color: var(--vermilion);
+    font-size: 0.9rem;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.interpret-btn {
+    margin-top: 10px;
+    background: var(--gold);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-btn {
+    margin-top: 20px;
+    background: transparent;
+    border: 1px solid var(--dark-wood);
+    padding: 8px 20px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .mascot-container {
+        left: 10px;
+        bottom: 10px;
+        max-width: 150px;
+    }
+
+    .mascot-img {
+        width: 80px;
+    }
+}

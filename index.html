@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>御神籤 - 日本神社體驗</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=ZCOOL+XiaoWei&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+
+    <!-- Mascot Cat -->
+    <div class="mascot-container" id="mascotContainer">
+        <img src="shrine_cat_mascot.png" alt="神社貓咪" class="mascot-img">
+        <div class="speech-bubble" id="mascotSpeech">歡迎來到本神社，請先洗手淨化身心吧！</div>
+    </div>
+
+    <div class="container">
+        <!-- Step 1: Hand Washing -->
+        <section id="stepWashing" class="flow-step active">
+            <h2>手水舍</h2>
+            <p>請點擊舀水洗手，淨化身心</p>
+            <div class="washing-station">
+                <div class="ladle" id="ladle">🥄</div>
+                <div class="water-effect" id="waterEffect"></div>
+            </div>
+            <button class="flow-btn" id="washDoneBtn" disabled>洗手完成</button>
+        </section>
+
+        <!-- Step 2: Offering -->
+        <section id="stepOffering" class="flow-step">
+            <h2>投賽錢</h2>
+            <p>投下 5 元硬幣，表達誠意（五円 = 有緣）</p>
+            <div class="coin-box">
+                <div class="coin" id="coin">💴</div>
+            </div>
+            <button class="flow-btn" id="offerDoneBtn" disabled>投幣完成</button>
+        </section>
+
+        <!-- Step 3: Prayer -->
+        <section id="stepPrayer" class="flow-step">
+            <h2>祈願</h2>
+            <p>敲響神鈴，虔誠祈禱</p>
+            <div class="bell-container" id="bellContainer">
+                <div class="bell-rope"></div>
+                <div class="bell">🔔</div>
+            </div>
+            <button class="flow-btn" id="prayerDoneBtn" disabled>祈願完成</button>
+        </section>
+
+        <!-- Step 4: Drawing -->
+        <section id="stepDrawing" class="flow-step">
+            <header>
+                <h1>御神籤</h1>
+            </header>
+            <div class="omikuji-box-wrapper" id="omikujiBox">
+                <div class="omikuji-box">
+                    <div class="box-top"></div>
+                    <div class="box-middle">
+                        <span class="kanji">奉納</span>
+                    </div>
+                    <div class="box-bottom"></div>
+                    <div class="stick-hole"></div>
+                </div>
+                <div class="omikuji-stick" id="omikujiStick"></div>
+            </div>
+            <button id="drawButton" class="draw-btn">搖一搖 抽籤</button>
+        </section>
+
+        <!-- Result Modal -->
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <div class="paper-border">
+                    <div class="lang-toggle-container">
+                        <span class="lang-label">日文</span>
+                        <label class="switch">
+                            <input type="checkbox" id="langToggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="lang-label">中文</span>
+                    </div>
+                    <div class="result-header">
+                        <span class="seal">御守</span>
+                        <h2 id="fortuneRank">大吉</h2>
+                    </div>
+                    <div class="result-body">
+                        <div class="poetry-section">
+                            <p id="poetryText" class="poetry"></p>
+                        </div>
+
+                        <!-- Initial hidden details -->
+                        <div id="detailsSection" class="details-section hidden">
+                            <div class="detail-item">
+                                <span class="label">願事</span>
+                                <p id="wishDetail"></p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">待人</span>
+                                <p id="personDetail"></p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">失物</span>
+                                <p id="lostDetail"></p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">旅行</span>
+                                <p id="travelDetail"></p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">商売</span>
+                                <p id="businessDetail"></p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="label">學問</span>
+                                <p id="studyDetail"></p>
+                            </div>
+                        </div>
+
+                        <button id="interpretBtn" class="interpret-btn">解籤內容</button>
+                    </div>
+                    <button id="closeButton" class="close-btn hidden">確認離開</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
