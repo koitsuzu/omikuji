@@ -383,8 +383,12 @@ header h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Reduced opacity to see background */
+    backdrop-filter: blur(5px);
+    /* Added blur for premium feel */
+    z-index: 200;
+    /* Higher z-index just in case */
     justify-content: center;
     align-items: center;
     opacity: 0;
@@ -399,140 +403,102 @@ header h1 {
 .modal-content {
     background-color: var(--paper);
     width: 90%;
-    max-width: 400px;
-    padding: 20px;
-    border-radius: 5px;
+    max-width: 450px;
+    max-height: 85vh;
+    /* Limit height */
+    overflow-y: auto;
+    /* Enable scrolling */
+    padding: 25px;
+    border-radius: 12px;
     transform: scale(0.8);
     transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: var(--vermilion) transparent;
+}
+
+/* Custom Scrollbar for Webkit */
+.modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background-color: var(--vermilion);
+    border-radius: 10px;
 }
 
 .modal.show .modal-content {
     transform: scale(1);
 }
 
+/* Modal Layout Refinement */
 .paper-border {
     border: 2px solid var(--dark-wood);
-    padding: 20px;
+    padding: 25px;
     position: relative;
+    background: var(--paper);
+    min-height: 100%;
 }
 
 .result-header {
     border-bottom: 2px solid var(--vermilion);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.seal {
+    display: block;
+    color: var(--vermilion);
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
 }
 
 #fortuneRank {
     font-size: 2.5rem;
     color: var(--vermilion);
     font-family: 'ZCOOL XiaoWei', serif;
+    margin: 0;
 }
 
 .poetry {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    margin-bottom: 20px;
-    color: #5D4037;
+    font-size: 1.15rem;
+    line-height: 2;
+    margin-bottom: 30px;
+    color: #4E342E;
     white-space: pre-line;
+    text-align: center;
+    font-weight: 500;
 }
 
-.hidden {
-    display: none !important;
+.explanation-section {
+    background: rgba(211, 47, 47, 0.04);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    border-left: 4px solid var(--vermilion);
+    box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.02);
 }
 
+.explanation-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--dark-wood);
+    text-align: justify;
+}
+
+/* Details Section Layout - Reverted to 2-column Grid */
 .details-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
-    /* Language Toggle Switch */
-    .lang-toggle-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-        background: rgba(255, 255, 255, 0.5);
-        padding: 8px 20px;
-        border-radius: 30px;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .lang-label {
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: #8b0000;
-        font-family: 'Noto Sans JP', 'ZCOOL XiaoWei', sans-serif;
-    }
-
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 50px;
-        height: 24px;
-    }
-
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ddd;
-        transition: .4s;
-        border: 1px solid #ccc;
-    }
-
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 18px;
-        width: 18px;
-        left: 3px;
-        bottom: 2px;
-        background-color: white;
-        transition: .4s;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    input:checked+.slider {
-        background-color: #8b0000;
-    }
-
-    input:checked+.slider:before {
-        transform: translateX(26px);
-    }
-
-    .slider.round {
-        border-radius: 34px;
-    }
-
-    .slider.round:before {
-        border-radius: 50%;
-    }
-
-    /* Typography Optimization for Chinese */
-    .poetry {
-        line-height: 1.8;
-    }
-
-    [lang="zh-TW"] .label {
-        letter-spacing: 2px;
-    }
-
-    gap: 15px;
-    text-align: left;
+    gap: 20px;
     border-top: 1px dashed #ccc;
-    padding-top: 20px;
-    animation: unfold 0.5s ease-out;
+    padding-top: 25px;
+    margin-top: 10px;
+    text-align: left;
 }
 
 @keyframes unfold {
@@ -547,13 +513,23 @@ header h1 {
     }
 }
 
+.detail-item {
+    margin-bottom: 5px;
+}
+
 .detail-item .label {
     display: block;
-    font-weight: bold;
     color: var(--vermilion);
+    font-weight: bold;
     font-size: 0.9rem;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+}
+
+.detail-item p {
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.4;
+    color: var(--dark-wood);
 }
 
 .interpret-btn {
